@@ -13,6 +13,9 @@
 body{background:#05070b;color:#fff;}
 .page{max-width:980px;margin:0 auto;padding:80px 24px 100px;}
 .hero{padding:60px 0 30px;border-bottom:1px solid rgba(255,255,255,.08);}
+.hero-head{display:flex;align-items:center;gap:24px;margin-bottom:22px;}
+.hero-icon{width:104px;height:104px;border-radius:28px;object-fit:cover;display:block;box-shadow:0 24px 60px rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);}
+.hero-copy{min-width:0;}
 .eyebrow{display:inline-block;padding:8px 14px;border-radius:999px;background:rgba(255,95,109,.12);color:#ff9caf;font-size:12px;letter-spacing:1.3px;text-transform:uppercase}
 h1{font-family:"Saira";font-size:56px;line-height:1.05;margin:18px 0 16px;}
 .lead{max-width:760px;color:#b4c0ce;font-size:18px;line-height:1.9;}
@@ -27,14 +30,19 @@ ul{padding-left:20px;}
 .meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:30px;}
 .card{padding:20px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);}
 .card strong{display:block;font-size:14px;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
-@media(max-width:768px){h1{font-size:38px;}.meta{grid-template-columns:1fr;}}
+@media(max-width:768px){.hero-head{flex-direction:column;align-items:flex-start;}.hero-icon{width:88px;height:88px;border-radius:24px;}h1{font-size:38px;}.meta{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
 <div class="page">
   <div class="hero">
-    <span class="eyebrow">Audio Utility</span>
-    <h1>Sonii</h1>
+    <div class="hero-head">
+      <img class="hero-icon" src="img/apps/sonii-icon.png" alt="Sonii app icon" />
+      <div class="hero-copy">
+        <span class="eyebrow">Audio Utility</span>
+        <h1>Sonii</h1>
+      </div>
+    </div>
     <p class="lead">Sonii is an iPhone audio utility app built for direct listening workflows. The product focus is speed, simplicity, and keeping audio interaction lightweight instead of bloated.</p>
     <div class="actions">
       <a class="btn primary" href="https://apps.apple.com/app/id6714477311" target="_blank" rel="noopener noreferrer">View on App Store</a>
@@ -43,7 +51,7 @@ ul{padding-left:20px;}
     <div class="meta">
       <div class="card"><strong>Platform</strong><span>iPhone</span></div>
       <div class="card"><strong>Category</strong><span>Audio</span></div>
-      <div class="card"><strong>Support</strong><span>support@toolcz.asia</span></div>
+      <div class="card"><strong>Support</strong><span>cherklouis2@gmail.com</span></div>
     </div>
   </div>
   <div class="section">

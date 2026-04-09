@@ -146,7 +146,7 @@
 }
 .toolcz-section-intro{
     max-width:720px;
-    margin:0 auto 20px auto;
+    margin:0 auto 36px auto;
     text-align:center;
     color:#9aa7b7;
 }
@@ -155,6 +155,7 @@
     display:flex;
     flex-direction:column;
     justify-content:space-between;
+    position:relative;
     background:linear-gradient(180deg,rgba(255,255,255,.04) 0%,rgba(255,255,255,.02) 100%);
     border-radius:18px;
     border:1px solid rgba(255,255,255,.06);
@@ -162,10 +163,37 @@
 }
 .toolcz-product-top{
     display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    gap:10px;
+    align-items:center;
+    gap:14px;
     margin-bottom:18px;
+    padding-right:92px;
+}
+.toolcz-product-brand{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    min-width:0;
+    flex:1 1 auto;
+}
+.toolcz-app-icon{
+    width:64px;
+    height:64px;
+    border-radius:18px;
+    display:block;
+    object-fit:cover;
+    flex:0 0 64px;
+    box-shadow:0 18px 40px rgba(0,0,0,.28);
+    border:1px solid rgba(255,255,255,.08);
+    background:#0b1220;
+}
+.toolcz-product-heading{
+    min-width:0;
+    flex:1 1 auto;
+    text-align:left;
+}
+.toolcz-product-heading h3{
+    margin:0;
+    line-height:1.2;
 }
 .toolcz-product-tag{
     display:inline-block;
@@ -177,6 +205,10 @@
     font-weight:700;
     text-transform:uppercase;
     letter-spacing:1px;
+    margin-bottom:0;
+    position:absolute;
+    top:24px;
+    right:24px;
 }
 .toolcz-product-card .svg{
     width:24px;
@@ -187,6 +219,7 @@
 }
 .toolcz-product-copy{
     color:#aeb8c4 !important;
+    text-align:left;
 }
 .toolcz-product-link{
     display:inline-flex;
@@ -195,37 +228,34 @@
     color:#fff;
     text-decoration:none;
     font-weight:600;
+    border-radius:12px;
+    transition:all .25s ease;
 }
 .toolcz-product-links{
     display:flex;
     gap:16px;
     flex-wrap:wrap;
+    margin-top:22px;
+}
+.toolcz-product-link.detail{
+    color:#d7e0ea;
+    padding:0;
+}
+.toolcz-product-link.detail:hover{
+    color:#ffffff;
+}
+.toolcz-product-link.store{
+    padding:11px 16px;
+    background:linear-gradient(135deg,#ffbf69 0%,#ff8a3d 100%);
+    color:#161b22;
+    box-shadow:0 10px 24px rgba(255,138,61,.24);
+}
+.toolcz-product-link.store:hover{
+    color:#161b22;
+    transform:translateY(-1px);
+    box-shadow:0 14px 30px rgba(255,138,61,.32);
 }
 .toolcz-product-link:hover{
-    color:#ffc371;
-}
-.toolcz-doc-card{
-    min-height:220px;
-    border-radius:16px;
-    padding:34px 30px;
-    background:linear-gradient(180deg,rgba(255,255,255,.04) 0%,rgba(255,255,255,.015) 100%);
-    border:1px solid rgba(255,255,255,.08);
-}
-.toolcz-doc-card .date p{
-    color:#ff8fa7;
-    text-transform:uppercase;
-    letter-spacing:1.2px;
-    font-size:12px;
-    font-weight:700;
-}
-.toolcz-doc-card .title_holder h3{
-    margin-bottom:10px;
-}
-.toolcz-doc-card .title_holder a{
-    color:#fff;
-    text-decoration:none;
-}
-.toolcz-doc-card .title_holder a:hover{
     color:#ffc371;
 }
 .toolcz-contact-panel{
@@ -234,20 +264,178 @@
     background:linear-gradient(135deg,rgba(255,95,109,.12) 0%,rgba(255,195,113,.07) 100%);
     border:1px solid rgba(255,255,255,.1);
 }
+.toolcz-contact-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:24px;
+    align-items:stretch;
+    float:none;
+    clear:both;
+}
+#contact .amar_tm_main_title{
+    padding-bottom:48px;
+}
+#contact .toolcz-contact-grid,
+#contact .toolcz-contact-card,
+#contact .toolcz-contact-panel,
+#contact .toolcz-contact-list,
+#contact .toolcz-contact-item,
+#contact .toolcz-contact-item label,
+#contact .toolcz-contact-item span,
+#contact .toolcz-contact-item a,
+#contact .toolcz-contact-lead,
+#contact .toolcz-contact-points li,
+#contact .toolcz-contact-note{
+    writing-mode:horizontal-tb;
+    transform:none;
+    letter-spacing:normal;
+    word-break:break-word;
+    text-orientation:mixed;
+}
+.toolcz-contact-card{
+    min-height:100%;
+    padding:32px;
+    border-radius:22px;
+    background:linear-gradient(180deg,rgba(255,255,255,.04) 0%,rgba(255,255,255,.02) 100%);
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 18px 50px rgba(0,0,0,.18);
+}
+.toolcz-contact-card h4,
+.toolcz-contact-panel h4{
+    margin:0 0 12px 0;
+    color:#fff;
+    font-size:24px;
+    line-height:1.2;
+}
+.toolcz-contact-badge{
+    display:inline-flex;
+    align-items:center;
+    padding:8px 12px;
+    border-radius:999px;
+    margin-bottom:16px;
+    background:rgba(255,191,105,.12);
+    color:#ffc98d;
+    font-size:11px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1.2px;
+}
+.toolcz-contact-meta{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:22px;
+}
+.toolcz-contact-pill{
+    display:inline-flex;
+    align-items:center;
+    padding:8px 12px;
+    border-radius:999px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    color:#d6deea;
+    font-size:12px;
+}
+.toolcz-contact-lead{
+    margin:0 0 24px 0;
+    color:#aeb8c4;
+    line-height:1.9;
+}
+.toolcz-contact-list{
+    display:grid;
+    gap:14px;
+}
+.toolcz-contact-item{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    align-items:flex-start;
+    padding:16px 18px;
+    border-radius:16px;
+    background:rgba(10,15,25,.42);
+    border:1px solid rgba(255,255,255,.06);
+}
+.toolcz-contact-item label{
+    color:#8ea0b5;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:1.3px;
+    font-weight:700;
+    flex:0 0 88px;
+}
+.toolcz-contact-item span,
+.toolcz-contact-item a{
+    color:#f8fafc;
+    text-align:left;
+    word-break:break-word;
+    line-height:1.7;
+}
+.toolcz-contact-item a:hover{
+    color:#ffc371;
+}
 .toolcz-contact-panel p{
     color:#ccd6e1;
+    line-height:1.9;
+}
+.toolcz-contact-actions{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    margin-top:26px;
+}
+.toolcz-contact-button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:12px 18px;
+    border-radius:14px;
+    text-decoration:none;
+    font-weight:700;
+    transition:all .25s ease;
+}
+.toolcz-contact-button.primary{
+    background:linear-gradient(135deg,#ffbf69 0%,#ff8a3d 100%);
+    color:#161b22;
+    box-shadow:0 10px 24px rgba(255,138,61,.24);
+}
+.toolcz-contact-button.secondary{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.12);
+    color:#fff;
+}
+.toolcz-contact-button.x{
+    background:#111318;
+    border:1px solid rgba(255,255,255,.12);
+    color:#f8fafc;
+    box-shadow:0 10px 24px rgba(0,0,0,.22);
+}
+.toolcz-contact-button:hover{
+    transform:translateY(-1px);
+}
+.toolcz-contact-points{
+    margin:0;
+    padding-left:18px;
+    color:#cdd7e3;
+}
+.toolcz-contact-points li{
+    margin-bottom:10px;
+    line-height:1.8;
 }
 .toolcz-contact-note{
     margin-top:18px;
     padding-top:18px;
     border-top:1px solid rgba(255,255,255,.08);
     color:#8ea0b5;
+    line-height:1.8;
 }
 .toolcz-brand-note{
     max-width:720px;
     margin:30px auto 0 auto;
     text-align:center;
     color:#8fa0b3;
+}
+#contact{
+    padding-bottom:80px;
 }
 @media(max-width:1040px){
     .toolcz-product-card{min-height:auto;}
@@ -257,6 +445,12 @@
     .toolcz-hero-actions{gap:10px;}
     .toolcz-button{min-width:unset;width:100%;}
     .toolcz-hero-copy{max-width:92%;}
+    .toolcz-contact-card,
+    .toolcz-contact-panel{padding:24px;}
+    .toolcz-contact-item{flex-direction:column;gap:8px;}
+    .toolcz-contact-item label{flex-basis:auto;}
+    .toolcz-contact-actions .toolcz-contact-button{width:100%;}
+    #contact{padding-bottom:56px;}
 }
 </style>
 <!--[if lt IE 9]> <script type="text/javascript" src="js/modernizr.custom.js"></script> <![endif]-->
@@ -288,9 +482,8 @@
             <ul class="anchor_nav">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#docs">Docs</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#features">Apps</a></li>
+                <li><a href="#contact">Support</a></li>
             </ul>
         </div>
     </div>
@@ -300,17 +493,17 @@
             <div class="overlay"></div>
             <div class="texts_wrap">
                 <div class="toolcz-hero-copy">
-                    <span class="toolcz-badge">Independent iPhone apps</span>
+                    <span class="toolcz-badge">Focused iPhone apps</span>
                     <div class="name_holder">
                         <h3>toolcz.asia</h3>
                     </div>
                     <div class="job_holder">
-                        <p>Useful iPhone software with tight scope, fast workflows, and less interface drag.</p>
+                        <p>Focused iPhone apps built for faster results, cleaner workflows, and less interface friction.</p>
                     </div>
-                    <p class="toolcz-hero-subtext">This is the public home for product links, support documents, privacy pages, terms, and advertising verification across the current toolcz.asia app portfolio.</p>
+                    <p class="toolcz-hero-subtext">Explore a compact portfolio of iPhone apps designed around specific tasks, with direct App Store access and a single place for support contact.</p>
                     <div class="toolcz-hero-actions">
                         <a class="toolcz-button primary" href="#features">Explore Apps</a>
-                        <a class="toolcz-button secondary" href="#docs">Policy And Verification</a>
+                        <a class="toolcz-button secondary" href="#contact">Get Support</a>
                     </div>
                     <div class="toolcz-hero-metrics">
                         <div class="toolcz-metric">
@@ -377,15 +570,19 @@
                             <div class="inner toolcz-product-card">
                                 <div>
                                 <div class="toolcz-product-top">
-                                <img class="svg" src="img/svg/speaker.svg" alt="" />
-                                <span class="toolcz-product-tag">Audio</span>
-                                </div>
+                                <div class="toolcz-product-brand">
+                                <img class="toolcz-app-icon" src="img/apps/sonii-icon.png" alt="Sonii app icon" />
+                                <div class="toolcz-product-heading">
                                 <h3>Sonii</h3>
-                                <p class="toolcz-product-copy">An audio-focused utility built for simple, direct listening workflows without extra clutter.</p>
+                                </div>
+                                </div>
+                                </div>
+                                <span class="toolcz-product-tag">Audio</span>
+                                <p class="toolcz-product-copy">Turn spoken ideas or text into polished voice audio, then reuse the same voice style across multiple languages.</p>
                                 </div>
                                 <div class="toolcz-product-links">
-                                    <a class="toolcz-product-link" href="sonii.html">Product Page</a>
-                                    <a class="toolcz-product-link" href="https://apps.apple.com/app/id6714477311" target="_blank" rel="noopener noreferrer">App Store</a>
+                                    <a class="toolcz-product-link detail" href="sonii.html">Details</a>
+                                    <a class="toolcz-product-link store" href="https://apps.apple.com/app/id6714477311" target="_blank" rel="noopener noreferrer">App Store</a>
                                 </div>
                             </div>
                         </li>
@@ -393,15 +590,19 @@
                             <div class="inner toolcz-product-card">
                                 <div>
                                 <div class="toolcz-product-top">
-                                <img class="svg" src="img/svg/wave.svg" alt="" />
-                                <span class="toolcz-product-tag">Cueing</span>
-                                </div>
+                                <div class="toolcz-product-brand">
+                                <img class="toolcz-app-icon" src="img/apps/lumacue-icon.png" alt="LumaCue app icon" />
+                                <div class="toolcz-product-heading">
                                 <h3>LumaCue</h3>
-                                <p class="toolcz-product-copy">A visual cueing app designed for guided prompts, paced attention, and cleaner on-screen signaling.</p>
+                                </div>
+                                </div>
+                                </div>
+                                <span class="toolcz-product-tag">Cueing</span>
+                                <p class="toolcz-product-copy">A clean teleprompter that helps creators stay on script, speak naturally, and finish video takes with less friction.</p>
                                 </div>
                                 <div class="toolcz-product-links">
-                                    <a class="toolcz-product-link" href="lumacue.html">Product Page</a>
-                                    <a class="toolcz-product-link" href="https://apps.apple.com/app/id6761381146" target="_blank" rel="noopener noreferrer">App Store</a>
+                                    <a class="toolcz-product-link detail" href="lumacue.html">Details</a>
+                                    <a class="toolcz-product-link store" href="https://apps.apple.com/app/id6761381146" target="_blank" rel="noopener noreferrer">App Store</a>
                                 </div>
                             </div>
                         </li>
@@ -409,15 +610,19 @@
                             <div class="inner toolcz-product-card">
                                 <div>
                                 <div class="toolcz-product-top">
-                                <img class="svg" src="img/svg/text_reading.svg" alt="" />
-                                <span class="toolcz-product-tag">Speech</span>
-                                </div>
+                                <div class="toolcz-product-brand">
+                                <img class="toolcz-app-icon" src="img/apps/speakloop-icon.png" alt="SpeakLoop app icon" />
+                                <div class="toolcz-product-heading">
                                 <h3>SpeakLoop</h3>
-                                <p class="toolcz-product-copy">A speaking practice workflow centered on repetition, rhythm, and short-loop voice training.</p>
+                                </div>
+                                </div>
+                                </div>
+                                <span class="toolcz-product-tag">Speech</span>
+                                <p class="toolcz-product-copy">Short-loop speaking practice for learners who want more repetition, steadier rhythm, and less friction between listening and speaking.</p>
                                 </div>
                                 <div class="toolcz-product-links">
-                                    <a class="toolcz-product-link" href="speakloop.html">Product Page</a>
-                                    <a class="toolcz-product-link" href="https://apps.apple.com/app/id6760541164" target="_blank" rel="noopener noreferrer">App Store</a>
+                                    <a class="toolcz-product-link detail" href="speakloop.html">Details</a>
+                                    <a class="toolcz-product-link store" href="https://apps.apple.com/app/id6760541164" target="_blank" rel="noopener noreferrer">App Store</a>
                                 </div>
                             </div>
                         </li>
@@ -425,16 +630,20 @@
                             <div class="inner toolcz-product-card">
                                 <div>
                                 <div class="toolcz-product-top">
-                                <img class="svg" src="img/svg/search.svg" alt="" />
-                                <span class="toolcz-product-tag">Utility</span>
-                                </div>
+                                <div class="toolcz-product-brand">
+                                <img class="toolcz-app-icon" src="img/apps/qr-barcode-fast-scanner-icon.png" alt="QR and Barcode Fast Scanner app icon" />
+                                <div class="toolcz-product-heading">
                                 <h3>QR &amp; Barcode Fast Scanner</h3>
-                                <p class="toolcz-product-copy">A fast QR and barcode scanning utility aimed at getting from camera to result with minimal delay.</p>
+                                </div>
+                                </div>
+                                </div>
+                                <span class="toolcz-product-tag">Utility</span>
+                                <p class="toolcz-product-copy">Quickly scan or generate QR codes and barcodes, with history, Wi-Fi sharing, social links, and broad format support.</p>
                                 <p class="toolcz-product-copy" style="font-size:12px;color:#7f90a4 !important;">App Store listing name: QR&amp;Barcode fast scaner</p>
                                 </div>
                                 <div class="toolcz-product-links">
-                                    <a class="toolcz-product-link" href="qr-barcode-fast-scanner.html">Product Page</a>
-                                    <a class="toolcz-product-link" href="https://apps.apple.com/app/id6736926144" target="_blank" rel="noopener noreferrer">App Store</a>
+                                    <a class="toolcz-product-link detail" href="qr-barcode-fast-scanner.html">Details</a>
+                                    <a class="toolcz-product-link store" href="https://apps.apple.com/app/id6736926144" target="_blank" rel="noopener noreferrer">App Store</a>
                                 </div>
                             </div>
                         </li>
@@ -442,28 +651,20 @@
                             <div class="inner toolcz-product-card">
                                 <div>
                                 <div class="toolcz-product-top">
-                                <img class="svg" src="img/svg/message.svg" alt="" />
-                                <span class="toolcz-product-tag">Backup</span>
-                                </div>
+                                <div class="toolcz-product-brand">
+                                <img class="toolcz-app-icon" src="img/apps/chat-backup-reader-icon.png" alt="Chat Backup Reader app icon" />
+                                <div class="toolcz-product-heading">
                                 <h3>Chat Backup Reader</h3>
-                                <p class="toolcz-product-copy">A reader utility for opening exported chat backup content in a cleaner, easier-to-review format.</p>
+                                </div>
+                                </div>
+                                </div>
+                                <span class="toolcz-product-tag">Backup</span>
+                                <p class="toolcz-product-copy">Use WhatsApp Web on your phone, manage dual accounts, send direct messages, and handle QR plus chat tools in one app.</p>
                                 <p class="toolcz-product-copy" style="font-size:12px;color:#7f90a4 !important;">App Store listing name: Chat Backup Reaer</p>
                                 </div>
                                 <div class="toolcz-product-links">
-                                    <a class="toolcz-product-link" href="chat-backup-reader.html">Product Page</a>
-                                    <a class="toolcz-product-link" href="https://apps.apple.com/app/id6738600792" target="_blank" rel="noopener noreferrer">App Store</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="inner toolcz-product-card">
-                                <div>
-                                <div class="toolcz-product-top">
-                                <img class="svg" src="img/svg/layers.svg" alt="" />
-                                <span class="toolcz-product-tag">Portfolio</span>
-                                </div>
-                                <h3>Public Site</h3>
-                                <p class="toolcz-product-copy">This domain hosts support links, policy pages, and verification files for the portfolio as a whole.</p>
+                                    <a class="toolcz-product-link detail" href="chat-backup-reader.html">Details</a>
+                                    <a class="toolcz-product-link store" href="https://apps.apple.com/app/id6738600792" target="_blank" rel="noopener noreferrer">App Store</a>
                                 </div>
                             </div>
                         </li>
@@ -473,96 +674,54 @@
             </div>
         </div>
 
-        <div class="amar_tm_section" id="docs">
-            <div class="container">
-                <div class="amar_tm_main_title">
-                    <span>Public documents</span>
-                    <h3>Privacy, terms, and advertising verification</h3>
-                </div>
-                <div class="amar_tm_news_wrap amar_tm_waypoint_effect">
-                    <ul>
-                        <li>
-                            <div class="inner toolcz-doc-card">
-                                <div class="texts">
-                                    <div class="date">
-                                        <p>Policy</p>
-                                    </div>
-                                    <div class="title_holder">
-                                        <h3><a href="privacy.html">Privacy Policy</a></h3>
-                                    </div>
-                                    <div class="definition">
-                                        <p>This page explains how the portfolio apps may process data and how support and analytics are handled.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="inner toolcz-doc-card">
-                                <div class="texts">
-                                    <div class="date">
-                                        <p>Agreement</p>
-                                    </div>
-                                    <div class="title_holder">
-                                        <h3><a href="terms.html">Terms of Use</a></h3>
-                                    </div>
-                                    <div class="definition">
-                                        <p>This page provides the general user agreement and usage rules for the apps and website.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="inner toolcz-doc-card">
-                                <div class="texts">
-                                    <div class="date">
-                                        <p>Ads</p>
-                                    </div>
-                                    <div class="title_holder">
-                                        <h3><a href="app-ads.txt">app-ads.txt</a></h3>
-                                    </div>
-                                    <div class="definition">
-                                        <p>The app-ads.txt file is published at the site root for mobile advertising verification.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
         <div class="amar_tm_section" id="contact">
             <div class="container">
                 <div class="amar_tm_main_title">
                     <span>Contact</span>
-                    <h3>Reach the portfolio operator</h3>
+                    <h3>Support, links, and public contact</h3>
                 </div>
-                <div class="amar_tm_contact_wrap_all">
-                    <div class="leftbox">
-                        <div class="short_info_wrap">
-                            <ul>
-                                <li>
-                                    <label>Website</label>
-                                    <span><a href="https://toolcz.asia">toolcz.asia</a></span>
-                                </li>
-                                <li>
-                                    <label>Email</label>
-                                    <span><a href="mailto:support@toolcz.asia">support@toolcz.asia</a></span>
-                                </li>
-                                <li>
-                                    <label>Status</label>
-                                    <span>Independent iPhone app portfolio</span>
-                                </li>
-                            </ul>
+                <div class="toolcz-contact-grid">
+                    <div class="toolcz-contact-card">
+                        <span class="toolcz-contact-badge">Portfolio Support</span>
+                        <h4>Reach toolcz.asia</h4>
+                        <div class="toolcz-contact-meta">
+                            <span class="toolcz-contact-pill">Fastest response by email</span>
+                            <span class="toolcz-contact-pill">Public updates on X</span>
+                        </div>
+                        <p class="toolcz-contact-lead">Use the support address for app issues, store review follow-up, policy requests, and verification questions across the portfolio.</p>
+                        <div class="toolcz-contact-list">
+                            <div class="toolcz-contact-item">
+                                <label>Email</label>
+                                <span><a href="mailto:support@toolcz.asia">support@toolcz.asia</a></span>
+                            </div>
+                            <div class="toolcz-contact-item">
+                                <label>Website</label>
+                                <span><a href="https://toolcz.asia" target="_blank" rel="noopener noreferrer">toolcz.asia</a></span>
+                            </div>
+                            <div class="toolcz-contact-item">
+                                <label>X</label>
+                                <span><a href="https://x.com/ChenYienya" target="_blank" rel="noopener noreferrer">@ChenYienya</a></span>
+                            </div>
+                            <div class="toolcz-contact-item">
+                                <label>Status</label>
+                                <span>Independent iPhone app portfolio</span>
+                            </div>
+                        </div>
+                        <div class="toolcz-contact-actions">
+                            <a class="toolcz-contact-button primary" href="mailto:support@toolcz.asia">Email Support</a>
+                            <a class="toolcz-contact-button x" href="https://x.com/ChenYienya" target="_blank" rel="noopener noreferrer">Open X Profile</a>
                         </div>
                     </div>
-                    <div class="rightbox">
-                        <div class="title toolcz-contact-panel">
-                            <p>If you are reviewing one of the apps for store listing or ad verification, use the document links above. For support, send an email with the app name, device model, and app version.</p>
-                            <div class="toolcz-contact-note">
-                                Primary contact: <a href="mailto:support@toolcz.asia">support@toolcz.asia</a><br />
-                                Domain used for app support pages and app-ads.txt publication.
-                            </div>
+                    <div class="toolcz-contact-panel">
+                        <h4>Before you send a message</h4>
+                        <p>If your question is about an App Store listing, policy review, or ad verification, the document links above are the fastest source of record. For product support, include enough context so the issue can be reproduced quickly.</p>
+                        <ul class="toolcz-contact-points">
+                            <li>Include the app name, iPhone model, and iOS version.</li>
+                            <li>Add the app version and a short description of what happened.</li>
+                            <li>Mention whether the issue is about support, policy, billing, or store review.</li>
+                        </ul>
+                        <div class="toolcz-contact-note">
+                            Public support pages, privacy documents, terms, and app-ads.txt are all published under the same domain for consistency.
                         </div>
                     </div>
                 </div>
