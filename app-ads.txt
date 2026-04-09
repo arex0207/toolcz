@@ -1,0 +1,4 @@
+# Replace the placeholder line below with the official app-ads.txt record
+# from your Yandex partner interface before going live.
+# Example format: example.com, publisher-id, DIRECT, certification-id
+yandex.com, REPLACE_WITH_OFFICIAL_RECORD_FROM_YANDEX, DIRECT
