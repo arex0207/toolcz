@@ -30,7 +30,7 @@ ul{padding-left:20px;}
 .meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:30px;}
 .card{padding:20px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);}
 .card strong{display:block;font-size:14px;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
-.video-panel{margin-top:20px;padding:18px;border-radius:20px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);box-shadow:0 16px 40px rgba(0,0,0,.24);}.video-aspect{position:relative;padding-top:56.25%;border-radius:14px;overflow:hidden;background:#020409;}.video-aspect video{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;}.video-note{margin-top:12px;color:#8ea0b5;font-size:13px;line-height:1.8;}@media(max-width:768px){.video-panel{padding:12px;}.hero-head{flex-direction:column;align-items:flex-start;}.hero-icon{width:88px;height:88px;border-radius:24px;}h1{font-size:38px;}.meta{grid-template-columns:1fr;}}
+.video-panel{margin-top:20px;padding:18px;border-radius:20px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);box-shadow:0 16px 40px rgba(0,0,0,.24);}.video-aspect{position:relative;padding-top:56.25%;border-radius:14px;overflow:hidden;background:#020409;}.video-aspect video{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;}.video-note{margin-top:12px;color:#8ea0b5;font-size:13px;line-height:1.8;}.hero .video-panel{margin:0 0 24px 0;}@media(max-width:768px){.video-panel{padding:12px;}.hero-head{flex-direction:column;align-items:flex-start;}.hero-icon{width:88px;height:88px;border-radius:24px;}h1{font-size:38px;}.meta{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -43,6 +43,15 @@ ul{padding-left:20px;}
         <h1>Video Translation</h1>
       </div>
     </div>
+    <div class="video-panel hero-video">
+      <div class="video-aspect">
+        <video controls playsinline preload="metadata" poster="img/apps/sonii-icon.png">
+          <source src="videos/video-translation-demo.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <p class="video-note">Replace <code>videos/video-translation-demo.mp4</code> with your final demo asset to publish the in-page preview.</p>
+    </div>
     <p class="lead">Video Translation is an iPhone audio utility app built for direct listening workflows. The product focus is speed, simplicity, and keeping audio interaction lightweight instead of bloated.</p>
     <div class="actions">
       <a class="btn primary" href="https://apps.apple.com/app/id6714477311" target="_blank" rel="noopener noreferrer">View on App Store</a>
@@ -52,19 +61,6 @@ ul{padding-left:20px;}
       <div class="card"><strong>Platform</strong><span>iPhone</span></div>
       <div class="card"><strong>Category</strong><span>Audio</span></div>
       <div class="card"><strong>Support</strong><span>cherklouis2@gmail.com</span></div>
-    </div>
-  </div>
-  <div class="section">
-    <h2>Demo Video</h2>
-    <p>Watch a quick landscape walkthrough that introduces the main flow and how to use the app.</p>
-    <div class="video-panel">
-      <div class="video-aspect">
-        <video controls playsinline preload="metadata" poster="img/apps/sonii-icon.png">
-          <source src="videos/video-translation-demo.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      </div>
-      <p class="video-note">Replace <code>videos/video-translation-demo.mp4</code> with your final demo asset to publish the in-page preview.</p>
     </div>
   </div>
   <div class="section">
