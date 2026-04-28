@@ -1016,7 +1016,7 @@ img.svg{
 	background-position: center;
 	background-size: cover;
 	position: relative;
-	background-image: url(..//img/slider/2.jpg);
+	background-image: url(../img/slider/2.jpg);
 }
 
 /*---------------------------------------------------*/
@@ -1664,7 +1664,7 @@ img.svg{
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
-	background-image: url(..//img/clients/1.jpg);
+	background-image: url(../img/clients/1.jpg);
 }
 .amar_tm_commentbox_wrap .wp p{color: #999;}
 .amar_tm_commentbox_wrap .wp h3 a{
