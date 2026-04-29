@@ -8,7 +8,7 @@
 	"use strict";
 
 	var defaultConfig = {
-		token: "YOUR_POSTHOG_PROJECT_API_KEY",
+		token: "phc_qGXRUzPJ7zEtdCWU34P7vArcAEFDweJ3FpkfvvDZdwhb",
 		api_host: "https://us.i.posthog.com",
 		disable_on_localhost: true,
 		sdk_url: "https://unpkg.com/posthog-js@latest/dist/module.no-external"
