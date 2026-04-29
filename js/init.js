@@ -4,6 +4,195 @@
  * This file is made for CURRENT TEMPLATE
 */
 
+(function setupToolczPosthog(){
+	"use strict";
+
+	var defaultConfig = {
+		token: "YOUR_POSTHOG_PROJECT_API_KEY",
+		api_host: "https://us.i.posthog.com",
+		disable_on_localhost: true,
+		sdk_url: "https://unpkg.com/posthog-js@latest/dist/module.no-external"
+	};
+	var config = window.TOOLCZ_ANALYTICS_CONFIG || {};
+	var token = (config.token || defaultConfig.token).trim();
+	var apiHost = (config.api_host || defaultConfig.api_host).trim();
+	var disableOnLocalhost = config.disable_on_localhost !== false;
+	var sdkUrl = (config.sdk_url || defaultConfig.sdk_url).trim();
+	var isLocalhost = /^(localhost|127\.0\.0\.1)$/i.test(window.location.hostname);
+
+	if(!token || token === defaultConfig.token){
+		return;
+	}
+
+	if(disableOnLocalhost && isLocalhost){
+		return;
+	}
+
+	if(typeof window.posthog !== "undefined"){
+		return;
+	}
+
+	var script = document.createElement("script");
+	script.async = true;
+	script.src = sdkUrl;
+	script.onload = function(){
+		if(typeof window.posthog === "undefined"){
+			return;
+		}
+
+		window.posthog.init(token, {
+			api_host: apiHost,
+			capture_pageview: true,
+			capture_pageleave: true,
+			person_profiles: "identified_only",
+			autocapture: true
+		});
+
+		window.posthog.register({
+			site_name: "toolcz.asia",
+			page_path: window.location.pathname,
+			page_type: getPageType(window.location.pathname)
+		});
+
+		trackCtaClicks();
+		trackScrollDepth();
+		trackProductImpression();
+		trackSeoLanding();
+	};
+
+	document.head.appendChild(script);
+
+	function getPageType(pathname){
+		if(pathname === "/" || pathname === "/index.html"){
+			return "home";
+		}
+		if(pathname.indexOf("/video-translation/") !== -1 || pathname.indexOf("/lumacue/") !== -1 || pathname.indexOf("/speakloop/") !== -1 || pathname.indexOf("/qr-barcode-fast-scanner/") !== -1 || pathname.indexOf("/chat-backup-reader/") !== -1){
+			return "product_detail";
+		}
+		return "other";
+	}
+
+	function trackCtaClicks(){
+		document.addEventListener("click", function(event){
+			var target = event.target;
+			if(!target){
+				return;
+			}
+			var link = target.closest("a, button");
+			if(!link){
+				return;
+			}
+
+			var classes = (link.className || "").toString();
+			var isCta = /toolcz-button|toolcz-product-link|toolcz-contact-button|anchor|nav_list/.test(classes) || link.closest(".toolcz-product-links");
+			if(!isCta){
+				return;
+			}
+
+			var card = link.closest(".toolcz-product-card");
+			var productTitle = card ? (card.querySelector("h3") ? card.querySelector("h3").textContent.trim() : "") : "";
+			var href = link.getAttribute("href") || "";
+			var isExternal = /^https?:\/\//i.test(href) || href.indexOf("mailto:") === 0;
+
+			window.posthog.capture("cta_click", {
+				text: (link.textContent || "").trim(),
+				href: href,
+				is_external: isExternal,
+				section: findSectionId(link),
+				product_name: productTitle
+			});
+		});
+	}
+
+	function trackScrollDepth(){
+		var checkpoints = [25, 50, 75, 90];
+		var sent = {};
+
+		window.addEventListener("scroll", function(){
+			var scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
+			var doc = document.documentElement;
+			var scrollHeight = doc.scrollHeight - doc.clientHeight;
+			if(scrollHeight <= 0){
+				return;
+			}
+			var percent = Math.round((scrollTop / scrollHeight) * 100);
+
+			for(var i = 0; i < checkpoints.length; i++){
+				var point = checkpoints[i];
+				if(percent >= point && !sent[point]){
+					sent[point] = true;
+					window.posthog.capture("scroll_depth", { depth_percent: point });
+				}
+			}
+		}, { passive: true });
+	}
+
+	function trackProductImpression(){
+		var cards = document.querySelectorAll(".toolcz-product-card");
+		if(!cards.length){
+			return;
+		}
+
+		if(!("IntersectionObserver" in window)){
+			return;
+		}
+
+		var seen = {};
+		var observer = new IntersectionObserver(function(entries){
+			entries.forEach(function(entry){
+				if(!entry.isIntersecting){
+					return;
+				}
+				var card = entry.target;
+				var titleEl = card.querySelector("h3");
+				var title = titleEl ? titleEl.textContent.trim() : "";
+				if(!title || seen[title]){
+					return;
+				}
+				seen[title] = true;
+				window.posthog.capture("product_card_impression", { product_name: title });
+				observer.unobserve(card);
+			});
+		}, { threshold: 0.5 });
+
+		cards.forEach(function(card){
+			observer.observe(card);
+		});
+	}
+
+	function findSectionId(node){
+		var section = node.closest("[id]");
+		return section ? section.id : "";
+	}
+
+	function trackSeoLanding(){
+		var key = "toolcz_seo_landing_tracked";
+		if(window.sessionStorage && window.sessionStorage.getItem(key) === "1"){
+			return;
+		}
+
+		var params = new URLSearchParams(window.location.search || "");
+		var utmSource = params.get("utm_source") || "";
+		var utmMedium = params.get("utm_medium") || "";
+		var utmCampaign = params.get("utm_campaign") || "";
+		var referrer = document.referrer || "";
+		var isOrganicReferrer = /google\.|bing\.|yahoo\.|duckduckgo\.|baidu\.|yandex\./i.test(referrer);
+		var isSeoVisit = utmMedium === "organic" || isOrganicReferrer;
+
+		window.posthog.capture("seo_landing", {
+			is_seo_visit: isSeoVisit,
+			utm_source: utmSource,
+			utm_medium: utmMedium,
+			utm_campaign: utmCampaign,
+			referrer: referrer
+		});
+
+		if(window.sessionStorage){
+			window.sessionStorage.setItem(key, "1");
+		}
+	}
+})();
+
 
 jQuery(document).ready(function(){
 
