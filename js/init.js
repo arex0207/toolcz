@@ -11,7 +11,7 @@
 		token: "YOUR_POSTHOG_PROJECT_API_KEY",
 		api_host: "https://us.i.posthog.com",
 		disable_on_localhost: true,
-		sdk_url: "https://unpkg.com/posthog-js@latest/dist/module.no-external"
+		sdk_url: "https://unpkg.com/posthog-js@latest/dist/posthog.js"
 	};
 	var config = window.TOOLCZ_ANALYTICS_CONFIG || {};
 	var token = (config.token || "").trim();
@@ -37,6 +37,7 @@
 	script.src = sdkUrl;
 	script.onload = function(){
 		if(typeof window.posthog === "undefined"){
+			console.warn("[PostHog] SDK loaded but window.posthog is undefined");
 			return;
 		}
 
@@ -58,6 +59,12 @@
 		trackScrollDepth();
 		trackProductImpression();
 		trackSeoLanding();
+		trackDebugEvent();
+		console.info("[PostHog] initialized", { api_host: apiHost, token_prefix: token.slice(0, 4) });
+	};
+
+	script.onerror = function(){
+		console.error("[PostHog] failed to load sdk", sdkUrl);
 	};
 
 	document.head.appendChild(script);
@@ -185,6 +192,22 @@
 			utm_medium: utmMedium,
 			utm_campaign: utmCampaign,
 			referrer: referrer
+		});
+
+		if(window.sessionStorage){
+			window.sessionStorage.setItem(key, "1");
+		}
+	}
+
+	function trackDebugEvent(){
+		var key = "toolcz_debug_event_sent";
+		if(window.sessionStorage && window.sessionStorage.getItem(key) === "1"){
+			return;
+		}
+
+		window.posthog.capture("debug_test_event", {
+			from: "auto_init",
+			page_url: window.location.href
 		});
 
 		if(window.sessionStorage){
