@@ -8,19 +8,19 @@
 	"use strict";
 
 	var defaultConfig = {
-		token: "phc_qGXRUzPJ7zEtdCWU34P7vArcAEFDweJ3FpkfvvDZdwhb",
+		token: "YOUR_POSTHOG_PROJECT_API_KEY",
 		api_host: "https://us.i.posthog.com",
 		disable_on_localhost: true,
 		sdk_url: "https://unpkg.com/posthog-js@latest/dist/module.no-external"
 	};
 	var config = window.TOOLCZ_ANALYTICS_CONFIG || {};
-	var token = (config.token || defaultConfig.token).trim();
+	var token = (config.token || "").trim();
 	var apiHost = (config.api_host || defaultConfig.api_host).trim();
 	var disableOnLocalhost = config.disable_on_localhost !== false;
 	var sdkUrl = (config.sdk_url || defaultConfig.sdk_url).trim();
 	var isLocalhost = /^(localhost|127\.0\.0\.1)$/i.test(window.location.hostname);
 
-	if(!token || token === defaultConfig.token){
+	if(!token || token.indexOf("YOUR_") === 0 || token.indexOf("phc_") !== 0){
 		return;
 	}
 
