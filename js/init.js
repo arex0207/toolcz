@@ -38,6 +38,7 @@
 	script.onload = function(){
 		if(typeof window.posthog === "undefined"){
 			console.warn("[PostHog] SDK loaded but window.posthog is undefined");
+			trackDebugEvent();
 			return;
 		}
 
@@ -101,7 +102,7 @@
 			var href = link.getAttribute("href") || "";
 			var isExternal = /^https?:\/\//i.test(href) || href.indexOf("mailto:") === 0;
 
-			window.posthog.capture("cta_click", {
+		captureEvent("cta_click", {
 				text: (link.textContent || "").trim(),
 				href: href,
 				is_external: isExternal,
@@ -128,7 +129,7 @@
 				var point = checkpoints[i];
 				if(percent >= point && !sent[point]){
 					sent[point] = true;
-					window.posthog.capture("scroll_depth", { depth_percent: point });
+					captureEvent("scroll_depth", { depth_percent: point });
 				}
 			}
 		}, { passive: true });
@@ -157,7 +158,7 @@
 					return;
 				}
 				seen[title] = true;
-				window.posthog.capture("product_card_impression", { product_name: title });
+				captureEvent("product_card_impression", { product_name: title });
 				observer.unobserve(card);
 			});
 		}, { threshold: 0.5 });
@@ -186,7 +187,7 @@
 		var isOrganicReferrer = /google\.|bing\.|yahoo\.|duckduckgo\.|baidu\.|yandex\./i.test(referrer);
 		var isSeoVisit = utmMedium === "organic" || isOrganicReferrer;
 
-		window.posthog.capture("seo_landing", {
+		captureEvent("seo_landing", {
 			is_seo_visit: isSeoVisit,
 			utm_source: utmSource,
 			utm_medium: utmMedium,
@@ -205,7 +206,7 @@
 			return;
 		}
 
-		window.posthog.capture("debug_test_event", {
+		captureEvent("debug_test_event", {
 			from: "auto_init",
 			page_url: window.location.href
 		});
@@ -213,6 +214,47 @@
 		if(window.sessionStorage){
 			window.sessionStorage.setItem(key, "1");
 		}
+	}
+
+	function captureEvent(eventName, properties){
+		if(window.posthog && typeof window.posthog.capture === "function"){
+			window.posthog.capture(eventName, properties || {});
+			return;
+		}
+
+		var distinctId = getOrCreateDistinctId();
+		var payload = {
+			api_key: token,
+			event: eventName,
+			properties: Object.assign({
+				distinct_id: distinctId,
+				$current_url: window.location.href
+			}, properties || {})
+		};
+
+		fetch(apiHost.replace(/\/$/, "") + "/capture/", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(payload),
+			keepalive: true
+		}).catch(function(err){
+			console.error("[PostHog] capture fallback failed", eventName, err);
+		});
+	}
+
+	function getOrCreateDistinctId(){
+		var key = "toolcz_posthog_distinct_id";
+		var value = "";
+		try{
+			value = window.localStorage.getItem(key) || "";
+			if(!value){
+				value = "anon_" + Math.random().toString(36).slice(2) + Date.now().toString(36);
+				window.localStorage.setItem(key, value);
+			}
+		}catch(e){
+			value = "anon_runtime_" + Date.now().toString(36);
+		}
+		return value;
 	}
 })();
 
