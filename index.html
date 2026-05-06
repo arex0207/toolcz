@@ -953,6 +953,138 @@
     <script type="text/javascript" src="js/init.js"></script>
     <script>
         (function () {
+            function getText(element) {
+                return (element && element.textContent ? element.textContent : '').trim();
+            }
+
+            function getAppNameFromLink(link) {
+                var card = link.closest('.toolcz-product-card');
+                if (!card) {
+                    return null;
+                }
+                var title = card.querySelector('h3');
+                return getText(title) || null;
+            }
+
+            function getAppStoreId(href) {
+                if (!href) {
+                    return null;
+                }
+                var match = href.match(/\\bid(\\d{6,})\\b/);
+                return match ? match[1] : null;
+            }
+
+            function track(eventName, data) {
+                var payload = data || {};
+                if (window.umami && typeof window.umami.track === 'function') {
+                    window.umami.track(eventName, payload);
+                    return;
+                }
+                window.__toolczUmamiQueue = window.__toolczUmamiQueue || [];
+                window.__toolczUmamiQueue.push([eventName, payload]);
+            }
+
+            function flushQueueWhenReady() {
+                if (!(window.umami && typeof window.umami.track === 'function')) {
+                    return false;
+                }
+                var queue = window.__toolczUmamiQueue;
+                if (!Array.isArray(queue) || queue.length === 0) {
+                    return true;
+                }
+                window.__toolczUmamiQueue = [];
+                queue.forEach(function (item) {
+                    try {
+                        window.umami.track(item[0], item[1] || {});
+                    } catch (e) {
+                        window.__toolczUmamiQueue.push(item);
+                    }
+                });
+                return true;
+            }
+
+            function scheduleQueueFlush() {
+                var attemptsLeft = 40;
+                var intervalId = window.setInterval(function () {
+                    attemptsLeft -= 1;
+                    var done = flushQueueWhenReady();
+                    if (done || attemptsLeft <= 0) {
+                        window.clearInterval(intervalId);
+                    }
+                }, 250);
+            }
+
+            function trackLandingParams() {
+                var params = new URLSearchParams(window.location.search || '');
+                var keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'ref', 'keyword'];
+                var data = {};
+                var hasAny = false;
+                keys.forEach(function (key) {
+                    var value = params.get(key);
+                    if (value) {
+                        data[key] = value;
+                        hasAny = true;
+                    }
+                });
+                if (hasAny) {
+                    track('landing_params', data);
+                }
+            }
+
+            scheduleQueueFlush();
+            trackLandingParams();
+
+            document.addEventListener('click', function (event) {
+                var link = event.target.closest('a');
+                if (!link) {
+                    return;
+                }
+
+                if (link.classList.contains('toolcz-button')) {
+                    track('home_cta_click', {
+                        cta: link.classList.contains('primary') ? 'explore_apps' : 'get_support',
+                        href: link.getAttribute('href') || ''
+                    });
+                    return;
+                }
+
+                if (link.classList.contains('toolcz-product-link')) {
+                    var appName = getAppNameFromLink(link);
+                    var href = link.getAttribute('href') || '';
+                    var id = getAppStoreId(href);
+                    if (link.classList.contains('store')) {
+                        track('app_store_click', {
+                            app: appName || '',
+                            app_store_id: id || '',
+                            source: 'features',
+                            href: href
+                        });
+                        return;
+                    }
+                    if (link.classList.contains('detail')) {
+                        track('details_click', {
+                            app: appName || '',
+                            source: 'features',
+                            href: href
+                        });
+                        return;
+                    }
+                }
+
+                if (link.classList.contains('toolcz-contact-button')) {
+                    track('contact_click', {
+                        channel: link.classList.contains('x') ? 'x' : 'email',
+                        href: link.getAttribute('href') || ''
+                    });
+                    return;
+                }
+
+                var href = link.getAttribute('href') || '';
+                if (href.indexOf('mailto:') === 0) {
+                    track('email_link_click', { href: href });
+                }
+            }, { passive: true });
+
             var featureGrid = document.querySelector('.toolcz-feature-grid');
             if (!featureGrid) {
                 return;
@@ -960,6 +1092,7 @@
 
             if (!('IntersectionObserver' in window)) {
                 featureGrid.classList.add('toolcz-feature-visible');
+                track('section_view', { section: 'features' });
                 return;
             }
 
@@ -967,6 +1100,7 @@
                 entries.forEach(function (entry) {
                     if (entry.isIntersecting) {
                         featureGrid.classList.add('toolcz-feature-visible');
+                        track('section_view', { section: 'features' });
                         observer.disconnect();
                     }
                 });

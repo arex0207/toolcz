@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i,700" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="css/plugins.css" />
 <link rel="stylesheet" type="text/css" href="css/style.css" />
+<script defer src="https://cloud.umami.is/script.js" data-website-id="9a97ab47-3b6b-4605-be74-9d34145579da"></script>
 <style>
 body{background:#05070b;color:#fff;}
 .page{max-width:980px;margin:0 auto;padding:80px 24px 100px;}
@@ -158,5 +159,143 @@ ul{padding-left:20px;}
     </div>
   </div>
 </div>
+<script>
+  (function () {
+    function getText(element) {
+      return (element && element.textContent ? element.textContent : '').trim();
+    }
+
+    function getAppName() {
+      var el = document.querySelector('.app-name');
+      return getText(el) || '';
+    }
+
+    function getAppStoreId(href) {
+      if (!href) {
+        return '';
+      }
+      var match = href.match(/\bid(\d{6,})\b/);
+      return match ? match[1] : '';
+    }
+
+    function track(eventName, data) {
+      var payload = data || {};
+      if (window.umami && typeof window.umami.track === 'function') {
+        window.umami.track(eventName, payload);
+        return;
+      }
+      window.__toolczUmamiQueue = window.__toolczUmamiQueue || [];
+      window.__toolczUmamiQueue.push([eventName, payload]);
+    }
+
+    function flushQueueWhenReady() {
+      if (!(window.umami && typeof window.umami.track === 'function')) {
+        return false;
+      }
+      var queue = window.__toolczUmamiQueue;
+      if (!Array.isArray(queue) || queue.length === 0) {
+        return true;
+      }
+      window.__toolczUmamiQueue = [];
+      queue.forEach(function (item) {
+        try {
+          window.umami.track(item[0], item[1] || {});
+        } catch (e) {
+          window.__toolczUmamiQueue.push(item);
+        }
+      });
+      return true;
+    }
+
+    function scheduleQueueFlush() {
+      var attemptsLeft = 40;
+      var intervalId = window.setInterval(function () {
+        attemptsLeft -= 1;
+        var done = flushQueueWhenReady();
+        if (done || attemptsLeft <= 0) {
+          window.clearInterval(intervalId);
+        }
+      }, 250);
+    }
+
+    function trackLandingParams() {
+      var params = new URLSearchParams(window.location.search || '');
+      var keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'ref', 'keyword'];
+      var data = {};
+      var hasAny = false;
+      keys.forEach(function (key) {
+        var value = params.get(key);
+        if (value) {
+          data[key] = value;
+          hasAny = true;
+        }
+      });
+      if (hasAny) {
+        track('landing_params', data);
+      }
+    }
+
+    scheduleQueueFlush();
+    trackLandingParams();
+
+    var app = getAppName();
+    track('details_view', {
+      app: app,
+      path: window.location.pathname || '',
+      source: 'details'
+    });
+
+    document.addEventListener('click', function (event) {
+      var link = event.target.closest('a');
+      if (!link) {
+        return;
+      }
+
+      var href = link.getAttribute('href') || '';
+      if (href.indexOf('https://apps.apple.com/') === 0 || href.indexOf('http://apps.apple.com/') === 0) {
+        track('app_store_click', {
+          app: app,
+          app_store_id: getAppStoreId(href),
+          source: 'details',
+          href: href
+        });
+        return;
+      }
+
+      if (href === '../index.html' || href === '/index.html') {
+        track('back_home_click', { app: app, source: 'details', href: href });
+        return;
+      }
+
+      if (href.indexOf('mailto:') === 0) {
+        track('email_link_click', { app: app, source: 'details', href: href });
+        return;
+      }
+
+      if (href.indexOf('https://mail.google.com/') === 0) {
+        track('contact_click', { app: app, source: 'details', channel: 'email', href: href });
+        return;
+      }
+
+      if (href.indexOf('https://x.com/') === 0) {
+        track('contact_click', { app: app, source: 'details', channel: 'x', href: href });
+        return;
+      }
+    }, { passive: true });
+
+    var video = document.querySelector('video');
+    if (video) {
+      var played = false;
+      video.addEventListener('play', function () {
+        if (played) {
+          return;
+        }
+        played = true;
+        var source = video.currentSrc || '';
+        track('video_play', { app: app, source: 'details', video: source });
+      }, { passive: true });
+    }
+  })();
+</script>
 </body>
 </html>
