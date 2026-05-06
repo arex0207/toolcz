@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hardware Profit Calculator App for iPhone | ROI &amp; Profitability Calculator</title>
+<meta name="description" content="Hardware Profit Calculator is an iPhone ROI and profitability calculator. Estimate hardware profit with power consumption, electricity cost, output rate, and difficulty inputs, then compare scenarios faster." />
+<link href="https://fonts.googleapis.com/css?family=Saira:300,400,500,600,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i,700" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="../css/plugins.css" />
+<link rel="stylesheet" type="text/css" href="../css/style.css" />
+<style>
+body{background:#05070b;color:#fff;}
+.page{max-width:980px;margin:0 auto;padding:80px 24px 100px;}
+.hero{padding:60px 0 30px;border-bottom:1px solid rgba(255,255,255,.08);}
+.hero-head{display:flex;align-items:center;gap:24px;margin-bottom:22px;}
+.hero-icon{width:104px;height:104px;border-radius:28px;object-fit:cover;display:block;box-shadow:0 24px 60px rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);}
+.hero-copy{min-width:0;}
+.eyebrow{display:inline-block;padding:8px 14px;border-radius:999px;background:rgba(123,210,132,.12);color:#9ef5aa;font-size:12px;letter-spacing:1.3px;text-transform:uppercase}
+h1{font-family:"Saira";font-size:56px;line-height:1.05;margin:18px 0 16px;}
+.app-name{font-family:"Saira";font-size:56px;line-height:1.05;margin:18px 0 16px;}
+.lead{max-width:760px;color:#b4c0ce;font-size:18px;line-height:1.9;}
+.actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px;}
+.btn{display:inline-block;padding:14px 22px;border-radius:14px;text-decoration:none;font-weight:700;text-transform:uppercase;font-size:13px;letter-spacing:1px}
+.btn.primary{background:linear-gradient(135deg,#7bd284 0%,#9ef5aa 100%);color:#111827;}
+.btn.secondary{border:1px solid rgba(255,255,255,.16);color:#fff;}
+.section{padding:38px 0;border-bottom:1px solid rgba(255,255,255,.06);}
+.section h2{font-family:"Saira";font-size:28px;margin-bottom:14px;}
+.section p,.section li{color:#b7c1cc;}
+ul{padding-left:20px;}
+.meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:30px;}
+.card{padding:20px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);}
+.card strong{display:block;font-size:14px;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.video-panel{margin-top:20px;padding:18px;border-radius:20px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);box-shadow:0 16px 40px rgba(0,0,0,.24);}
+.video-aspect{position:relative;padding-top:56.25%;border-radius:14px;overflow:hidden;background:#020409;}
+.video-aspect video{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;}
+.video-note{margin-top:12px;color:#8ea0b5;font-size:13px;line-height:1.8;}
+.support-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:18px;}
+.support-card{padding:20px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);display:flex;flex-direction:column;gap:12px;min-height:176px;}
+.support-card-top{display:flex;align-items:center;gap:12px;}
+.support-badge{width:42px;height:42px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);flex:0 0 auto;}
+.support-badge img{width:18px;height:18px;display:block;}
+.support-card h3{margin:0;font-size:16px;font-weight:700;}
+.support-muted{color:#8ea0b5;font-size:13px;line-height:1.7;margin:0;}
+.support-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto;}
+.support-actions .btn{padding:12px 16px;border-radius:12px;font-size:12px;}
+.support-faq{margin-top:18px;}
+.support-faq details{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:14px 16px;}
+.support-faq details+details{margin-top:10px;}
+.support-faq summary{cursor:pointer;list-style:none;font-weight:700;color:#e8f1ff;}
+.support-faq summary::-webkit-details-marker{display:none;}
+.support-faq .answer{margin-top:10px;color:#b7c1cc;line-height:1.9;font-size:14px;}
+@media(max-width:768px){.video-panel{padding:12px;}.hero-head{flex-direction:column;align-items:flex-start;}.hero-icon{width:88px;height:88px;border-radius:24px;}h1{font-size:38px;}.app-name{font-size:38px;}.meta{grid-template-columns:1fr;}.support-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="hero">
+    <div class="hero-head">
+      <img class="hero-icon" src="../img/apps/hardware-profit-calculator-icon.jpg" alt="Hardware Profit Calculator app icon for iPhone ROI and profitability estimation" />
+      <div class="hero-copy">
+        <span class="eyebrow">Hardware ROI</span>
+        <div class="app-name">Hardware Profit Calculator</div>
+      </div>
+    </div>
+    <h1>Hardware Profit Calculator for ROI and Profitability</h1>
+    <p class="lead">Hardware Profit Calculator is an iPhone profitability calculator built to estimate hardware ROI with less guesswork. Enter power consumption, electricity cost, output rate, and difficulty level to calculate profit, compare hardware scenarios, and review potential returns faster.</p>
+    <div class="actions">
+      <a class="btn primary" href="https://apps.apple.com/app/id6762212326" target="_blank" rel="noopener noreferrer">View on App Store</a>
+      <a class="btn secondary" href="../index.html">Back to toolcz.asia</a>
+    </div>
+    <div class="meta">
+      <div class="card"><strong>Platform</strong><span>iPhone</span></div>
+      <div class="card"><strong>Category</strong><span>Utilities</span></div>
+      <div class="card"><strong>Support</strong><span>cherklouis2@gmail.com</span></div>
+    </div>
+  </div>
+  <div class="video-panel hero-video">
+    <div class="video-aspect">
+      <video controls playsinline preload="metadata" poster="../img/apps/hardware-profit-calculator-icon.jpg">
+        <source src="videos/hardware-profit-calculator-demo.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <p class="video-note">Replace <code>videos/hardware-profit-calculator-demo.mp4</code> with your final demo asset to publish the in-page preview.</p>
+  </div>
+  <div class="section">
+    <h2>What It Solves</h2>
+    <p>This hardware profit calculator helps turn operating inputs into a clearer profitability view. It is useful for estimating hardware ROI, comparing different configurations, checking how electricity cost or output changes affect profit, and reviewing scenarios where difficulty shifts over time.</p>
+  </div>
+  <div class="section">
+    <h2>Who It Is For</h2>
+    <ul>
+      <li>Users evaluating hardware profitability before they commit to a device or setup.</li>
+      <li>People who want a simple ROI calculator for power cost, output rate, and difficulty changes.</li>
+      <li>Anyone who needs a lightweight hardware profitability calculator on iPhone without sign-in friction.</li>
+    </ul>
+  </div>
+  <div class="section">
+    <h2>Support</h2>
+    <p class="support-muted">Need help, want to report a bug, or have a product suggestion? Use the same support channels as the rest of the portfolio.</p>
+    <div class="support-grid">
+      <div class="support-card">
+        <div class="support-card-top">
+          <div class="support-badge" aria-hidden="true">
+            <img src="https://cdn.simpleicons.org/gmail/ffffff" alt="" />
+          </div>
+          <div>
+            <h3>Email Support</h3>
+            <p class="support-muted">Best for bug reports, App Store questions, and detailed feedback.</p>
+          </div>
+        </div>
+        <p class="support-muted">Include your iPhone model, iOS version, app version, and the exact values or scenario you were testing.</p>
+        <div class="support-actions">
+          <a class="btn primary" href="https://mail.google.com/mail/?view=cm&fs=1&to=cherklouis2%40gmail.com&su=Hardware%20Profit%20Calculator%20Support&body=Hi%20Hardware%20Profit%20Calculator%20Support%2C%0A%0ADevice%3A%20%0AiOS%3A%20%0AApp%20Version%3A%20%0A%0AMessage%3A%20%0A" target="_blank" rel="noopener noreferrer">Email</a>
+          <a class="btn secondary" href="https://mail.google.com/mail/?view=cm&fs=1&to=cherklouis2%40gmail.com&su=Hardware%20Profit%20Calculator%20Bug%20Report&body=Hi%20Hardware%20Profit%20Calculator%20Support%2C%0A%0ADevice%3A%20%0AiOS%3A%20%0AApp%20Version%3A%20%0A%0ASteps%20to%20reproduce%3A%0A1)%20%0A2)%20%0A3)%20%0A%0AExpected%3A%20%0AActual%3A%20%0A%0AInput%20values%20used%3A%20%0A" target="_blank" rel="noopener noreferrer">Bug Report Template</a>
+        </div>
+      </div>
+      <div class="support-card">
+        <div class="support-card-top">
+          <div class="support-badge" aria-hidden="true">
+            <img src="https://cdn.simpleicons.org/x/ffffff" alt="" />
+          </div>
+          <div>
+            <h3>X / Updates</h3>
+            <p class="support-muted">Good for quick questions and release updates.</p>
+          </div>
+        </div>
+        <p class="support-muted">If you need to share test values or screenshots, email is still the fastest option.</p>
+        <div class="support-actions">
+          <a class="btn secondary" href="https://x.com/ChenYienya" target="_blank" rel="noopener noreferrer">Open X</a>
+        </div>
+      </div>
+    </div>
+    <div class="support-faq">
+      <details>
+        <summary>What should I include in a support email?</summary>
+        <div class="answer">
+          <ul>
+            <li>Your iPhone model and iOS version</li>
+            <li>The app version you are using</li>
+            <li>The input values entered and the result you expected</li>
+          </ul>
+        </div>
+      </details>
+      <details>
+        <summary>What can this hardware ROI calculator estimate?</summary>
+        <div class="answer">It is designed to estimate hardware profitability using inputs such as power consumption, electricity cost, output rate, and difficulty level, so you can compare possible return scenarios more quickly.</div>
+      </details>
+      <details>
+        <summary>Where can I find the official Hardware Profit Calculator App Store page?</summary>
+        <div class="answer"><a href="https://apps.apple.com/app/id6762212326" target="_blank" rel="noopener noreferrer">Open the Hardware Profit Calculator App Store listing</a> to review the latest store details, availability, and screenshots.</div>
+      </details>
+    </div>
+  </div>
+</div>
+</body>
+</html>
