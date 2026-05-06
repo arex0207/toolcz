@@ -1016,6 +1016,9 @@
             }
 
             function trackLandingParams() {
+                if (window.sessionStorage && sessionStorage.getItem('__toolcz_landing_params_sent') === '1') {
+                    return;
+                }
                 var params = new URLSearchParams(window.location.search || '');
                 var keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'ref', 'keyword'];
                 var data = {};
@@ -1029,6 +1032,9 @@
                 });
                 if (hasAny) {
                     track('landing_params', data);
+                    if (window.sessionStorage) {
+                        sessionStorage.setItem('__toolcz_landing_params_sent', '1');
+                    }
                 }
             }
 
